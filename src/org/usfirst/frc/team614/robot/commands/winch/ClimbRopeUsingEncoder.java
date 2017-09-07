@@ -19,7 +19,8 @@ public class ClimbRopeUsingEncoder extends Command {
 
     // Called just before this Command runs the first time
     protected void initialize() {
-    	Robot.winch.spinWinch(Constants.WINCH_SPEED);
+    	Robot.winch.reset();
+    	
     	SmartDashboard.putBoolean("Winch is climbing", true);
     }
 
@@ -34,9 +35,14 @@ public class ClimbRopeUsingEncoder extends Command {
 
     // Make this return true when the winch is at the top (motor stalls -> higher current draw)
     protected boolean isFinished() {
-    	if(Robot.winch.getEncoderRevolutions() > Constants.WINCH_ENCODER_REVOLUTIONS_TO_TOP) {
+    	
+    	if(Robot.winch.shouldBeStopped()) {
     		return true;
     	}
+    	
+//    	if(Robot.winch.getEncoderRevolutions() > Constants.WINCH_ENCODER_REVOLUTIONS_TO_TOP) {
+//    		return true;
+//    	}
         return false;
     }
 

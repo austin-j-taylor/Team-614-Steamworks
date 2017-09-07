@@ -39,17 +39,20 @@ public class RobotMap {
 	public static final int winchMotorA = 4;
 	public static final int winchMotorB = 5;
 	
-	public static final int shooterFireMotor = 6;
+	public static final int shooterFeederAccelerator = 6;
+	public static final int shooterFeederBelts = 7;
 	
-	public static final int elevatorMotor = 7;
+//	public static final int feederMotor = 7;
 	
 	public static final int hopperMotor = 8;
+	
+	public static final int shooterServo = 9;
 
 	// Power Distribution Board
-	public static final int PDPWinchMotor = 14;
+	public static final int PDPWinchMotor = 0; // we think it's zero
 	
-	// Pneumatics
-	public static final DoubleSolenoid.Value pistonOut = DoubleSolenoid.Value.kForward;
-	public static final DoubleSolenoid.Value pistonIn = DoubleSolenoid.Value.kReverse;
-
+	// Talon ID
+	public static final int talonMaster = 1;
+	public static final int talonSlave = 3;
+	
 }

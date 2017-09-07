@@ -20,7 +20,7 @@ public class TryToCatchRope extends Command {
     // Called just before this Command runs the first time
     protected void initialize() {
     	Robot.winch.reset();
-    	Robot.winch.spinWinch(Constants.WINCH_SPEED);
+    	Robot.winch.set(Constants.WINCH_SPEED);
     	SmartDashboard.putBoolean("Winch is climbing", false);
     }
 
@@ -30,6 +30,11 @@ public class TryToCatchRope extends Command {
 
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
+    	
+    	if(Robot.winch.shouldBeStopped()) {
+    		return true;
+    	}
+    	
     	if(this.timeSinceInitialized() > .5) {
 	    	// motor is under strain, it caught the rope
 	    	if(Robot.pdp.getCurrent(RobotMap.PDPWinchMotor) > Constants.WINCH_CURRENT_DRAW_AT_CATCHING_ROPE) {

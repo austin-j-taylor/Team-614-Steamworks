@@ -24,8 +24,11 @@ public class Drivetrain extends Subsystem implements PIDOutput {
 	public Encoder rightEncoder;
 	
 	PIDController turnController;
-    private double rotateToAngleRate;
-    private boolean usingPID;
+
+    private double PIDrotateToAngleRate;
+    
+    private boolean usingTurnPID;
+    public boolean flippyThingButton;
     
     /* The following PID Controller coefficients will need to be tuned */
     /* to match the dynamics of your drive system.  Note that the      */
@@ -34,7 +37,7 @@ public class Drivetrain extends Subsystem implements PIDOutput {
     /* and D constants and test the mechanism.                         */
     
 
-    static final double kToleranceDegrees = 2.0f;
+    static final double turnTolerance = 0.1f;
 	
 	// VictorSP motor controllers
 //	VictorSP leftMotor = new VictorSP(RobotMap.drivetrainLeftMotor);
@@ -47,7 +50,8 @@ public class Drivetrain extends Subsystem implements PIDOutput {
 	
 	public Drivetrain() {
 		
-		usingPID = false;
+		usingTurnPID = false;
+		flippyThingButton = false;
 		drivetrain = new RobotDrive(leftMotorA, leftMotorB, rightMotorA, rightMotorB);
 		leftEncoder = new Encoder(RobotMap.drivetrainLeftEncoderA, RobotMap.drivetrainLeftEncoderB, false, Encoder.EncodingType.k4X);
 		rightEncoder = new Encoder(RobotMap.drivetrainRightEncoderA, RobotMap.drivetrainRightEncoderB, false, Encoder.EncodingType.k4X);
@@ -56,17 +60,17 @@ public class Drivetrain extends Subsystem implements PIDOutput {
 		rightEncoder.setDistancePerPulse(Constants.DRIVETRAIN_DISTANCE_PER_PULSE);
 		
 		turnController = new PIDController(
-				Constants.drivetrainP,
-				Constants.drivetrainI,
-				Constants.drivetrainD,
-				Constants.drivetrainF,
+				Constants.drivetrainRotationP,
+				Constants.drivetrainRotationI,
+				Constants.drivetrainRotationD,
+				Constants.drivetrainRotationF,
 				Robot.navX, this
 		);
         turnController.setInputRange(-180.0f,  180.0f);
         turnController.setOutputRange(-1.0, 1.0);
-        turnController.setAbsoluteTolerance(kToleranceDegrees);
+        turnController.setAbsoluteTolerance(turnTolerance);
         turnController.setContinuous(true);
-
+        
         /* Add the PID Controller to the Test-mode dashboard, allowing manual  */
         /* tuning of the Turn Controller's P, I and D coefficients.            */
         /* Typically, only the P value needs to be modified.                   */
@@ -79,35 +83,56 @@ public class Drivetrain extends Subsystem implements PIDOutput {
         setDefaultCommand(new TankDrive());
     }
     public void arcadeDrive(double moveValue, double rotateValue) {
-    	drivetrain.arcadeDrive(moveValue, -rotateValue);
+    	if(flippyThingButton)
+    		drivetrain.arcadeDrive(moveValue, -rotateValue);
+    	else
+    		drivetrain.arcadeDrive(-moveValue, -rotateValue);
     }
     public void stop() {
     	drivetrain.arcadeDrive(0, 0);
+    }
+    public void setDistancePerPulse(double dpp) {
+
+		leftEncoder.setDistancePerPulse(dpp);
+		rightEncoder.setDistancePerPulse(dpp);
     }
     public void reset() {
     	leftEncoder.reset();
     	rightEncoder.reset();
     }
-	public void setUsingPID(boolean set) {
-		usingPID = set;
+	public void setUsingTurnPID(boolean set) {
+		usingTurnPID = true;
 		if(set == true) {
 			turnController.enable();
 		} else {
 			turnController.disable();
 		}
 	}
-	public boolean getUsingPID() {
-		return usingPID;
+	public void setUsingDistancePID(boolean set) {
+		Robot.drivetrainCompanion.setUsingDistancePID(set);
 	}
-	public double getRotateRate() {
-		return rotateToAngleRate;
+	public boolean getUsingTurnPID() {
+		return usingTurnPID;
 	}
-	public PIDController getController() {
+	public boolean getUsingDistancePID() {
+		return Robot.drivetrainCompanion.getUsingDistancePID();
+	}
+	public double getPIDRotateRate() {
+		return PIDrotateToAngleRate;
+	}
+	public double getPIDSpeed() {
+		return Robot.drivetrainCompanion.getPIDSpeed();
+	}
+	public PIDController getTurnController() {
 		return turnController;
+	}
+	public PIDController getDistanceController() {
+		return Robot.drivetrainCompanion.getDistanceController();
 	}
 
 	public void pidWrite(double output) {
-		rotateToAngleRate = output;
+		if(usingTurnPID)
+			PIDrotateToAngleRate = output;
 	}
 }
 

@@ -12,21 +12,27 @@ public class Winch extends Subsystem {
 
 	VictorSP winchMotorA = new VictorSP(RobotMap.winchMotorA);
 	VictorSP winchMotorB = new VictorSP(RobotMap.winchMotorB);
-	public Encoder winchEncoder = new Encoder(RobotMap.winchEncoderA, RobotMap.winchEncoderB, false, Encoder.EncodingType.k4X);
+	private Encoder winchEncoder = new Encoder(RobotMap.winchEncoderA, RobotMap.winchEncoderB, true, Encoder.EncodingType.k4X);
+	
+	private boolean shouldBeStopped;
 	
 	public Winch() {
 		
 		winchEncoder.setDistancePerPulse(Constants.WINCH_ENCODER_DISTANCE_PER_PULSE);
 		winchEncoder.reset();
+		
+		shouldBeStopped = true;
 	
 	}
     // Put methods for controlling this subsystem
-    // here. Call these from Commands.
-	public void spinWinch(double speed) {
+    // here. Call these from Comm;ands.
+	public void set(double speed) {
+		shouldBeStopped = false;
 		winchMotorA.set(speed);
 		winchMotorB.set(speed);
 	}
 	public void stop() {
+		shouldBeStopped = true;
 		winchMotorA.set(0.0);
 		winchMotorB.set(0.0);
 	}
@@ -35,6 +41,15 @@ public class Winch extends Subsystem {
 	}
 	public double getEncoderRevolutions() {
 		return winchEncoder.getDistance();
+	}
+	public double getRate() {
+		return winchEncoder.getRate();
+	}
+	public boolean shouldBeStopped() {
+		return shouldBeStopped;
+	}
+	public void setShouldBeStopped(boolean set) {
+		shouldBeStopped = set;
 	}
     public void initDefaultCommand() {
         // Set the default command for a subsystem here.
