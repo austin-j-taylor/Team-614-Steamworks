@@ -9,7 +9,6 @@ import edu.wpi.first.wpilibj.command.CommandGroup;
  *
  */
 public class CenterGear extends CommandGroup {
-
     public CenterGear() {
     	addSequential(new DeliverGear(false, false, true));
     }

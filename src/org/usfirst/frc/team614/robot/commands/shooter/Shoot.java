@@ -13,7 +13,7 @@ public class Shoot extends CommandGroup {
 
     public Shoot(boolean isTeleop, boolean shootingFromAirship, boolean shouldRotateAtAll, boolean shouldRotateIfNoVision, boolean rotationDirection) {
 
-//    	 rev shooter
+//    	rev shooter
     	if(shootingFromAirship) {
     		addParallel(new RevShooterFromAirship());
     	} else {
