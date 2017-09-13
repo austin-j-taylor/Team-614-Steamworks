@@ -31,16 +31,16 @@ public class RobotMap {
 	public static final int winchEncoderB = 7;
 	
 	// Motor Controller Ports (PWM)
-	public static final int drivetrainLeftMotorA = 0;
-	public static final int drivetrainLeftMotorB = 1;
-	public static final int drivetrainRightMotorA = 2;
-	public static final int drivetrainRightMotorB = 3;
+	public static final int drivetrainLeftMotorA = 0; // 0
+	public static final int drivetrainLeftMotorB = 1; // 1
+	public static final int drivetrainRightMotorA = 2; // 6
+	public static final int drivetrainRightMotorB = 3; // 7
 
-	public static final int winchMotorA = 4;
-	public static final int winchMotorB = 5;
+	public static final int winchMotorA = 4; // 4
+	public static final int winchMotorB = 5; // 5
 	
-	public static final int shooterFeederAccelerator = 6;
-	public static final int shooterFeederBelts = 7;
+	public static final int shooterFeederAccelerator = 6; // ?
+	public static final int shooterFeederBelts = 7; // 2
 	
 //	public static final int feederMotor = 7;
 	
