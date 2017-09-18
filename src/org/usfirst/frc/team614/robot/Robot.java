@@ -13,7 +13,7 @@ import org.usfirst.frc.team614.robot.commands.drivetrain.DriveForADistance;
 import org.usfirst.frc.team614.robot.subsystems.Drivetrain;
 import org.usfirst.frc.team614.robot.subsystems.DrivetrainCompanion;
 import org.usfirst.frc.team614.robot.subsystems.GearFeeder;
-import org.usfirst.frc.team614.robot.subsystems.Hopper;
+//import org.usfirst.frc.team614.robot.subsystems.Hopper;
 import org.usfirst.frc.team614.robot.subsystems.Pneumatics;
 import org.usfirst.frc.team614.robot.subsystems.Shooter;
 import org.usfirst.frc.team614.robot.subsystems.Winch;
@@ -49,7 +49,7 @@ public class Robot extends IterativeRobot {
 	public static Shooter shooter;
 	public static Winch winch;
 	public static GearFeeder gearFeeder;
-	public static Hopper hopper;
+	//public static Hopper hopper;
 	public static Pneumatics pneumatics;
 	
 	public static Servo shooterServo;
@@ -84,7 +84,7 @@ public class Robot extends IterativeRobot {
     	shooter = new Shooter();
     	winch = new Winch();
     	gearFeeder = new GearFeeder();
-    	hopper = new Hopper();
+    	//hopper = new Hopper();
     	pneumatics = new Pneumatics();
     	
     	shooterServo = new Servo(RobotMap.shooterServo);
@@ -200,6 +200,8 @@ public class Robot extends IterativeRobot {
 //        SmartDashboard.putNumber("Winch Encoder Distance (Revs)", 0);
 //        SmartDashboard.putNumber("Winch Encoder Rate (Revs per Sec)", 0);
 
+        SmartDashboard.putNumber("Shooter Intake Speed", 0);
+        
 		printNavXData();
 		
 		

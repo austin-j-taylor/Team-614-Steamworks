@@ -2,7 +2,7 @@ package org.usfirst.frc.team614.robot.commands.shooter;
 
 import org.usfirst.frc.team614.robot.Robot;
 import org.usfirst.frc.team614.robot.commands.drivetrain.RotateToVisionTarget;
-import org.usfirst.frc.team614.robot.commands.hopper.RevHopper;
+//import org.usfirst.frc.team614.robot.commands.hopper.RevHopper;
 
 import edu.wpi.first.wpilibj.command.CommandGroup;
 

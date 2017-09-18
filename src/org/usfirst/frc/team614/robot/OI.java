@@ -4,6 +4,7 @@ import org.team708.robot.util.Gamepad;
 import org.usfirst.frc.team614.robot.commands.drivetrain.FlippyThingButton;
 import org.usfirst.frc.team614.robot.commands.pneumatics.ActivateGearHolder;
 import org.usfirst.frc.team614.robot.commands.pneumatics.TogglePiston;
+import org.usfirst.frc.team614.robot.commands.shooter.RevIntake;
 import org.usfirst.frc.team614.robot.commands.shooter.RevShooterFeeder;
 import org.usfirst.frc.team614.robot.commands.shooter.RevShooterFromHopper;
 import org.usfirst.frc.team614.robot.commands.winch.CatchAndClimbRope;
@@ -97,7 +98,7 @@ public class OI {
 
 	private static final Button revShooterFeeder = new JoystickButton(driverGamepad, Gamepad.button_B);
 	
-	
+	private static final Button revShooterIntake = new JoystickButton(driverGamepad, Gamepad.button_L_Shoulder);
 
 	// Binding of Commands
 	public OI() {
@@ -121,6 +122,8 @@ public class OI {
 //		RevShooterFromAirship.whileHeld(new Shoot(true, true, false, false, false));
 		
 		revShooterFeeder.whileHeld(new RevShooterFeeder());
+		
+		revShooterIntake.toggleWhenPressed(new RevIntake());
 		
 		// reverses driving direction
 		

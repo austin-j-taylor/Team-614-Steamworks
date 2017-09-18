@@ -27,11 +27,11 @@ public class Shooter extends Subsystem {
 	private boolean usingEncoder = true;
 	private boolean shootingFromAirship = true; // true if robot is shooting from airship; false if robot is right up to the boiler
 	
-	
 	public CANTalon talonMaster = new CANTalon(RobotMap.talonMaster);
 	public CANTalon talonSlave = new CANTalon(RobotMap.talonSlave);
 	public VictorSP victorAccelerator = new VictorSP(RobotMap.shooterFeederAccelerator);
 	public VictorSP victorBelts = new VictorSP(RobotMap.shooterFeederBelts);
+	public VictorSP victorIntake = new VictorSP(RobotMap.hopperMotor);
 	
 	public Shooter() {
 
@@ -84,6 +84,7 @@ public class Shooter extends Subsystem {
         
 		victorAccelerator.set(0);
 		victorBelts.set(0);
+		victorIntake.set(0);
 	}
 	
 	public void reset() {
@@ -102,6 +103,9 @@ public class Shooter extends Subsystem {
 	public void revFeeder(double speed) {
 		victorAccelerator.set(speed);
 		victorBelts.set(speed);
+	}
+	public void revIntake(double speed) {
+		victorIntake.set(speed);
 	}
 	public double getDistance() {
 		return talonMaster.get();
@@ -127,7 +131,6 @@ public class Shooter extends Subsystem {
         // Set the default command for a subsystem here.
 //        setDefaultCommand(new ShooterDrive());
     }
-
 }
 
 
