@@ -20,6 +20,10 @@ public class Shoot extends CommandGroup {
     		addParallel(new RevShooterFromHopper());
     	}
     	
+    	
+    	// 78 inches - 2600 rpm; 4ft actual
+    	// autonomous value 2700; feed 0.5; 
+    	
     	// line up to boiler
     	// if in autonomous, rotate left or right if vision target isn't on screen
     	// if in teleop, don't rotate if no vision targeting is recieved; default left/right rotation is ignored.

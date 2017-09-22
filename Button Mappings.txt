@@ -3,7 +3,7 @@ Left Joystick:
 Right Joystick:
 	X-Direction: Rotate robot left and right
 Shoulders:
-	LB: Elevator (hold)
+	LB: Intake (toggle)
 	LT: Boiler Shot (Assuming the robot is already driven up to the gear holder)
 	RB: Reverse Climbing Sequence
 	RT: Airship Shot

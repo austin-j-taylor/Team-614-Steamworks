@@ -11,8 +11,6 @@ import edu.wpi.first.wpilibj.command.Command;
  * TODO: negate rotation speed if wrong direction
  */
 public class RotateToVisionTarget extends Command {
-	
-
 	boolean usingGearCamera = false;
 	boolean shouldRotateIfNoVision = false;
 	boolean rotationDirection = false;	// left for false, right for true
@@ -96,7 +94,7 @@ public class RotateToVisionTarget extends Command {
 	    		hitTarget = true;
 	    	} else {
     			if(!hitTarget) {
-    				Robot.drivetrain.getTurnController().setSetpoint(angle + Constants.SHOOTER_CAMERA_OFFSET);
+    				Robot.drivetrain.getTurnController().setSetpoint(Robot.navX.getYaw() + angle + Constants.SHOOTER_CAMERA_OFFSET);
     			}
 	    	}
 	    	Robot.drivetrain.arcadeDrive(0, .7 * Robot.drivetrain.getPIDRotateRate());
