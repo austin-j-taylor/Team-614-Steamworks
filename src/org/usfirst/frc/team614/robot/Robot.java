@@ -64,7 +64,7 @@ public class Robot extends IterativeRobot {
 	public static OI oi;
 	
     Command autonomousCommand;
-    SendableChooser chooser;
+    SendableChooser<Command> chooser;
 
     /**
      * This function is run when the robot is first started up and should be
@@ -101,7 +101,7 @@ public class Robot extends IterativeRobot {
     	shooterCamera = NetworkTable.getTable("shooterCamera");
     	
 
-        chooser = new SendableChooser();
+        chooser = new SendableChooser<Command>();
         chooser.addDefault("Deliver Center Gear and Stop", new CenterGear());
         chooser.addDefault("[RED] Deliver Center Gear and Shoot", new RedCenterGearAndShoot());
         chooser.addDefault("[BLUE] Deliver Center Gear and Shoot", new BlueCenterGearAndShoot());
@@ -282,8 +282,6 @@ public class Robot extends IterativeRobot {
 	 * or additional comparisons to the switch structure below with additional strings & commands.
 	 */
     public void autonomousInit() {
-
-
     	cameraIsActive = true;
     	shooter.setUsingEncoder(true);
     	winch.setShouldBeStopped(true);

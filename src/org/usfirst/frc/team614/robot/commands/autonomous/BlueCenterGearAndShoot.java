@@ -17,6 +17,6 @@ public class BlueCenterGearAndShoot extends CommandGroup {
     	
     	addSequential(new RotateToAngle(90, true));
     	
-    	addParallel(new Shoot(false, true, true, false, false));
+    	//addParallel(new Shoot(false, true, true, false, false));
     }
 }

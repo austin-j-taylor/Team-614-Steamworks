@@ -15,17 +15,14 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
  *
  */
 public class BlueKnockHopperAndShoot extends CommandGroup {
-
     public BlueKnockHopperAndShoot() {
     	double speed = 0.8;
     	
-    	// drives to hopper
-    	addSequential(new DriveForADistance(8 /*distance is in feet?*/, speed));
+    	addSequential(new DriveForADistance(140 /*distance is in feet?*/, speed));
     	addSequential(new RotateToAngle(-90, true));
-    	// run into hopper
     	addSequential(new DriveUntilStopped(speed, 5)); // use this command until exact measurments are made.
     	//addSequential(new RotateToAngle(Robot.navX.getYaw() + SmartDashboard.getNumber("Shooter Camera Angle", 0), false));
-    	addParallel(new Shoot(false, false, true, false, true));
+    	addSequential(new Shoot(false, true));
     	
     	/*
     	addSequential(new DriveStraightForADistance(-118, -Constants.DRIVETRAIN_AUTONOMOUS_SPEED));

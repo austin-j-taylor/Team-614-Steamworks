@@ -10,39 +10,34 @@ import edu.wpi.first.wpilibj.command.CommandGroup;
  *
  */
 public class Shoot extends CommandGroup {
-
-    public Shoot(boolean isTeleop, boolean shootingFromAirship, boolean shouldRotateAtAll, boolean shouldRotateIfNoVision, boolean rotationDirection) {
-
-//    	rev shooter
-    	if(shootingFromAirship) {
-    		addParallel(new RevShooterFromAirship());
-    	} else {
-    		addParallel(new RevShooterFromHopper());
-    	}
-    	
+    public Shoot(boolean isTeleop, boolean rotationDirection) {
+    	addParallel(new RevShooterFromHopper());
+    	addParallel(new RotateToVisionTarget(rotationDirection));
     	
     	// 78 inches - 2600 rpm; 4ft actual
-    	// autonomous value 2700; feed 0.5; 
+    	// autonomous value 2700; feed 0.5;
     	
     	// line up to boiler
     	// if in autonomous, rotate left or right if vision target isn't on screen
     	// if in teleop, don't rotate if no vision targeting is recieved; default left/right rotation is ignored.
     	// if camera is broken, don't rotate at all
-    	if(shouldRotateAtAll) {
+    	//if(shouldRotateAtAll) {
 //    		addSequential(new RotateToVisionTarget(false, shouldRotateIfNoVision, rotationDirection)); // on blue side => rotate right and vice versa
-    		addParallel(new RotateToVisionTarget(false, shouldRotateIfNoVision, rotationDirection)); // on blue side => rotate right and vice versa
-    	}
+    		 // on blue side => rotate right and vice versa
+    	//}
+    	
+    	
     	// wait until shooter is up to speed...
 //    	addSequential(new WaitUntilShooterIsAtTargetSpeed());
 //    	feed balls into shooter...
 //    	addSequential(new RevHopper());
-    	if(isTeleop) {
+    	//if(isTeleop) {
     		// button held to let command last
-    	} else {
+    	//} else {
     		// autonomous:
     		// approx. time for all balls to shoot
 //        	addSequential(new WaitUntilAllBallsAreShot()); // doesnt work haha woops
-    	}
+    	//}
     	
     }
     protected void end() {
