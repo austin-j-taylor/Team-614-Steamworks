@@ -14,7 +14,7 @@ import edu.wpi.first.wpilibj.command.Command;
 public class DriveStraightForADistanceAtAbsoluteAngle extends Command
 {
 	private double distance, speed, angle;
-	private boolean done = false;
+//	private boolean done = false;
 
 	public DriveStraightForADistanceAtAbsoluteAngle(double distance, double speed, double angle)
 	{
@@ -43,17 +43,18 @@ public class DriveStraightForADistanceAtAbsoluteAngle extends Command
 	protected void execute()
 	{
 		
-		if (Robot.drivetrain.rightEncoder.getDistance() > distance) {
-			
-			Robot.drivetrain.arcadeDrive(-speed, 0);
-			if(done == false) {
-				setTimeout(this.timeSinceInitialized() + .3);
-				done = true;
-			}
-		} else {
+//		if (Robot.drivetrain.rightEncoder.getDistance() > distance) {
+//			
+//			Robot.drivetrain.arcadeDrive(-speed, 0);
+//			if(done == false) {
+//				setTimeout(this.timeSinceInitialized() + .3);
+//				done = true;
+//			}
+//		if(Robot.navX.isMoving())
+//		} else {
 
 			Robot.drivetrain.arcadeDrive(Robot.drivetrain.getPIDSpeed(), Robot.drivetrain.getPIDRotateRate());
-		}
+//		}
 		
 		
 	}
@@ -64,16 +65,25 @@ public class DriveStraightForADistanceAtAbsoluteAngle extends Command
 	// The size of the wheel MUST be changed in Constants if changed!
 	protected boolean isFinished()
 	{
+
+    	// Robot isn't at the immediate start of command and may be stopped b/c it never even started
+    	if(this.timeSinceInitialized() > .2) {
+	    	// PID stuff is done
+	    	if(!Robot.navX.isMoving()) {
+	    		return true;
+	    	}
+    	}	
+		return false; 
 //		 only tests right side... we're driving straight, so who cares.
-		if (Robot.drivetrain.rightEncoder.getDistance() > distance) {
-			
-			Robot.drivetrain.arcadeDrive(-1, 0);
-			setTimeout(this.timeSinceInitialized() + .1);
-		return true;
-		}
-		if(done)
-			return isTimedOut();
-	return false;
+//		if (Robot.drivetrain.rightEncoder.getDistance() > distance) {
+//			
+//			Robot.drivetrain.arcadeDrive(-1, 0);
+//			setTimeout(this.timeSinceInitialized() + .1);
+//			return true;
+//		}
+//		if(done)
+//			return isTimedOut();
+//		return false;
 	}
 
 	// Called once after isFinished returns true
