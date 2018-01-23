@@ -26,6 +26,8 @@ public class BlueKnockHopperAndShoot extends CommandGroup {
     	addParallel(new Shoot(false, false, false, false, false));
     	
     	addParallel(new RotateToAngle(13, true));
+    	
+    	
     	/*
     	addSequential(new DriveStraightForADistance(-118, -Constants.DRIVETRAIN_AUTONOMOUS_SPEED));
     	addSequential(new RotateToAngle(90, true));
